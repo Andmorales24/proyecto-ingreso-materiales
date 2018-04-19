@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario Materiales Electronicos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="Js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="Js/Formulario.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="CSS/form.css">
+</head>
+<body>
+<div class="container">  
+  <div id="contact" >
+    <h3>Materiales</h3>
+    <h4>Registrar materiales electronicos</h4>
+    <fieldset>
+      <input id="descri" placeholder="Descripcion" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input id="cantidad" placeholder="Cantidad" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="marca" placeholder="Marca" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="color" placeholder="Color" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="identi" placeholder="Identificador" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="responsable" placeholder="Responsable" type="text" tabindex="2" required>
+    </fieldset>  
+    <button name="submit"  id="botonAnadir" onclick="annadirMaterialElec()">Añadir</button>
+    <button name="submit"  id="botonGuardar" onclick="guardarMaterialElec()" >Guardar</button>
+</div>
+<div id="table">
+<table id="tabla">
+    </table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<header>
+<title>Formulario </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="Js/jquery-3.2.1.min.js"></script>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="CSS/form.css">
+
+
+</header>
+<body>
+<div class="container">  
+  <div id="contact" >
+    <h3>Proyectos</h3>
+    <h4>Registrar proyectos</h4>
+    <fieldset>
+      <input id="code" placeholder="Codigo del proyecto" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input id="nombre" placeholder="Nombre del proyecto" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="nivel" placeholder="Nivel" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="seccion" placeholder="Seccion" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="especialidad" placeholder="Especialidad" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="logo" placeholder="Logo"  type="file" tabindex="2">
+    </fieldset>
+    <fieldset>
+      <input id="numeroAula" placeholder="# de aula" type="text" tabindex="4" required>
+    </fieldset>
+      <button name="submit" id="botonEnviar" onclick="guardarProyecto()">Guardar</button>
+      <button name="submit"  id="botonMostrar" onclick="mostrarProyectos()" >Mostrar Guardados</button>
+
+</div>
+
+    <table id="tabla">
+    </table>
+</div>
+<script type="text/javascript" src="Js/Formulario.js"></script>
+
+</body>
+</html>

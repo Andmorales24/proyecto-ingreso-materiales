@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario Integrantes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="Js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/form.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+<body onload="mostrarIntegrantes()">
+<div class="container">  
+  <div id="contact" >
+    <h3>Integrantes</h3>
+    <h4>Registrar integrantes</h4>
+    <fieldset>
+      <input id="nombre" placeholder="Nombre" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input id="pa" placeholder="Primer apellido" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="sa" placeholder="Segundo apellido" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="foto" placeholder="Foto " type="file" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input id="carne" placeholder="Carne" type="text" tabindex="2" required>
+      </fieldset>
+      <button name="submit"  id="botonAnadir" onclick="annadirestudiante()">Añadir</button>
+      <button name="submit"  id="botonGuardar" onclick="guardarIntegrantes()" >Guardar</button>
+</div>
+    <table id="tabla">
+    </table>
+</div>
+       <script type="text/javascript" src="Js/Formulario.js"></script>
+</body>
+</html>

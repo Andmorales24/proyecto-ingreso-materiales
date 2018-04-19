@@ -1,0 +1,20 @@
+function mostrar(){
+    var campos = new Object();
+    $.ajax({
+        url: 'http://localhost:8080/api/todosProyectosexpo',
+        type: 'POST',
+        dataType:'json',
+        data: campos,
+        success: function(datad, textStatus, xhr){
+            for (var ele in datad){
+                document.getElementById("nombre").innerHTML +=datad[ele].nombre+"<hr> ";
+                document.getElementById("codigo").innerHTML +=datad[ele].codigo+"<hr> ";
+                document.getElementById("nivel").innerHTML +=datad[ele].nivel+"<hr> ";
+                document.getElementById("especialidad").innerHTML +=datad[ele].especialidad+"<hr> ";
+                document.getElementById("logo").innerHTML +=datad[ele].urllogo+"<hr> ";
+                document.getElementById("aula").innerHTML +=datad[ele].aula+"<hr> ";
+                document.getElementById("seccion").innerHTML +=datad[ele].seccion+"<hr> ";
+            }
+        },
+    });
+}

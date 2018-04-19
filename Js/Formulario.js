@@ -35,7 +35,7 @@ function guardarProyecto(){
         }
     $('input[type="text"],input[type="date"]').val('');
         $.ajax({ 
-            url: 'http://localhost:8080/api/insertarproyecto',
+            url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,

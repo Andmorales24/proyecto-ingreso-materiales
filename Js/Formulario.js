@@ -52,7 +52,7 @@ function guardarProyecto(){
 function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
-        url: 'http://localhost:8080/api/todosProyectosexpo',
+        url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,

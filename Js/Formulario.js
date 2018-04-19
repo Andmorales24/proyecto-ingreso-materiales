@@ -35,7 +35,7 @@ function guardarProyecto(){
         }
     $('input[type="text"],input[type="date"]').val('');
         $.ajax({ 
-            url: 'http:/api/insertarproyecto',
+            url: 'https:/api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,

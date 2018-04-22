@@ -31,16 +31,16 @@ function guardarProyecto(){
             campos.urllogo= 'logos/'+ document.getElementById("nombre").value + "." + sFileExtension;
         }
         else{
-            campos.urllogo= '../logos/' + document.getElementById('nombre').value;
+            campos.urllogo= 'logos/' + document.getElementById('nombre').value;
         }
     $('input[type="text"],input[type="date"]').val('');
         $.ajax({ 
-            url: '/api/insertarproyecto',
+            url: 'http://localhost:8080/api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,
             success: function(datad, textStatus, xhr){
-            //subeImagen();
+            subeImagen();
             alert("Se guardo el proyecto");
         },
         error: function(xhr, textStaus, errorThrown){
@@ -52,30 +52,13 @@ function guardarProyecto(){
 function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
-        url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/todosProyectosexpo',
+        url: 'http://localhost:8080/api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,
         success: function(datad, textStatus, xhr){
-        document.getElementById("tabla").innerHTML +=
-        "<thead>"+
-            "<tr>"+
-                "<th class='titulos'>Codigo</th>"+
-                "<th class='titulos'>Nombre</th>"+
-                "<th class='titulos'>Seccion</th>"+
-                "<th class='titulos'>Nivel</th>"+
-                "<th class='titulos'>Especialidad</th>"+
-                "<th class='titulos'>Logo</th>"+
-                "<th class='titulos'>Aula</th>"+
-                "<th class='titulos'>Integrantes</th>"+
-                "<th class='titulos'>MaterialesElec</th>"+
-                "<th class='titulos'>MaterialesNoElec</th>"+
-            "</tr>"+
-        "</thead>";
-
             for (var ele in datad){
-                document.getElementById("tabla").innerHTML += 
-                "<tbody>"+
+                document.getElementById("bodyTabla").innerHTML += 
                 "<tr>" +
                     "<td class='resul'>"+datad[ele].codigo + "</td>" + 
                     "<td class='resul'>"+datad[ele].nombre+"</td> " +
@@ -84,23 +67,53 @@ function mostrarProyectos(){
                     "<td class='resul'>"+datad[ele].especialidad+"</td> "+
                     "<td class='resul'>" +datad[ele].urllogo+"</td> "+
                     "<td class='resul'>"+datad[ele].aula+"</td>" + 
+                    "<td class='resul'>"+"<button type='submit' class='botonTabla' onclick='eliminarProyecto(\""+datad[ele].nombre +")'>Eliminar</button>"+"</td>" + 
                     "<td class='resul'>"+"<button type='submit' class='botonTabla' onclick='annadirIntegranteTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].integrantes)+")'>Añadir</button>"+"</td>" + 
                     "<td class='resul'>"+"<button type='submit'  class='botonTabla' onclick='annadirMaterialesElecTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].materialeselectronicos)+")'>Añadir</button>"+"</td>" +
                     "<td class='resul'>"+"<button type='submit'  class='botonTabla' onclick='annadirMaterialesNoElecTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].materialesnoelectronicos)+")'>Añadir</button>"+"</td>" +
-                "</tr>"+
-             "</tbody>";
+                "</tr>";
                 
             }
+$(document).ready(function() {
+    $('table').DataTable( {
+        "language": {
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "info": "Mostrando _PAGE_ de _PAGES_ de _MAX_ registros totales",
+            "search": "Buscar",
+            "lengthMenu": "Mostrar _MENU_ resultados",
+            "emptyTable": "No hay datos en la tabla"
+        },   
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal( {
+                    header: function ( row ) {
+                        var data = row.data();
+                        return 'Detalles del proyecto '+data[1];
+                    }
+                } ),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                    tableClass: 'table'
+                } )
+            }
+        }
+    } );
+} );
+
+
         },
     });
 }
+
+    
 //Fin para proyectos
 //Para imagen
-/*function subeImagen(){
+function subeImagen(){
 var files = $("#logo").get(0).files;
 if (files.length > 0){
     var data = new FormData();
-    files[0].name = 'planilla';
     for (i = 0; i < files.length; i++){
         data.append(document.getElementById('nombre').value, files[i]);
     }
@@ -113,7 +126,7 @@ if (files.length > 0){
         data: data,
         success: function (result){
             alert ("Imagenes guardadas");
-            location.href='Integrantes.html'
+            location.href='Formulario.html'
         }
         
     });
@@ -122,7 +135,6 @@ else{
     alert ("Por favor seleccione una imagen");
 }
 }
-*/
 //Fin imagen
 //Empieza el añadido de estudiantes
 function annadirestudiante(){  
@@ -142,7 +154,7 @@ function guardarIntegrantes(){
     objeto.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objeto.integrantes = inte;
     $.ajax({ 
-            url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/annadeestudiantes',
+            url: 'http://localhost:8080/api/annadeestudiantes',
             type: 'POST',
             dataType:'json',
             data: objeto,
@@ -153,7 +165,6 @@ function guardarIntegrantes(){
             alert (xhr);
         }
         });
-        mostrarIntegrantes();
 }
 function annadirIntegranteTabla(nombreproyecto,estudiantes){
     localStorage.setItem("estudiantesdelproyecto",JSON.stringify(estudiantes));
@@ -161,11 +172,11 @@ function annadirIntegranteTabla(nombreproyecto,estudiantes){
     window.open('Integrantes.html')
 }
 function mostrarIntegrantes(){
-    document.getElementById("tabla").innerHTML ="<tr><th class='titulos'>Nombre</th><th class='titulos'>Carne</th><th class='titulos'>Foto</th><th class='titulos'>Pa</th><th class='titulos'>Sa</th><th class='titulos'>Boton</th></tr>"
+    document.getElementById("headerTabla").innerHTML ="<tr><th class='titulos'>Nombre</th><th class='titulos'>Carne</th><th class='titulos'>Foto</th><th class='titulos'>Pa</th><th class='titulos'>Sa</th><th class='titulos'>Boton</th></tr>"
     
 
     for (var ele in inte){
-        document.getElementById("tabla").innerHTML += 
+        document.getElementById("bodyTabla").innerHTML += 
 
             "<tr>" +
                 "<td class='resul'>" + inte[ele].nombre + "</td>" + 
@@ -177,11 +188,41 @@ function mostrarIntegrantes(){
             "</tr>";
   
     }
+$(document).ready(function() {
+    $('table').DataTable( {
+        "language": {
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "info": "Mostrando _PAGE_ de _PAGES_ de _MAX_ registros totales",
+            "search": "Buscar",
+            "lengthMenu": "Mostrar _MENU_ resultados",
+            "emptyTable": "No hay datos en la tabla"
+        },   
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal( {
+                    header: function ( row ) {
+                        var data = row.data();
+                        return 'Detalles del integrante';
+                    }
+                } ),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                    tableClass: 'table'
+                } )
+            }
+        }
+    } );
+} );
 }
 function eliminarEstudiantes(carne){
-
-    for (var ele in inte){
-        if (inte[ele].carne == carne){
+$(document).on('click', '#eliminar', function (event) {
+    event.preventDefault();
+    $(this).closest('tr').remove();
+});
+        for (var ele in inte){
+        if (inte[ele].carne== carne){
             inte.splice(ele,1);
         }
         
@@ -189,9 +230,6 @@ function eliminarEstudiantes(carne){
     mostrarIntegrantes();
     guardarIntegrantes();
 }
-    
-
-
 
 //Fin del añadido de integrantes
 
@@ -218,7 +256,7 @@ function guardarMaterialElec(){
     objetoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoElec.materialeselectronicos = matesElec;
     $.ajax({ 
-            url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/materialeslectronicos',
+            url: 'http://localhost:8080/api/materialeslectronicos',
             type: 'POST',
             dataType:'json',
             data: objetoElec,
@@ -233,12 +271,12 @@ function guardarMaterialElec(){
 }
 function mostrarMaterialElec(){
 
-    document.getElementById("tabla").innerHTML =
+    document.getElementById("headerTable").innerHTML =
             "<tr><th class='titulos'>Descripcion</th><th class='titulos'>Cantidad</th><th class='titulos'>Marca</th><th class='titulos'>Color</th><th class='titulos'>Identificador</th><th class='titulos'>Responsable</th><th class='titulos'>Botón</th></tr>";
 
     for (var ele in matesElec){
         
-        document.getElementById("tabla").innerHTML += 
+        document.getElementById("bodyTable").innerHTML = 
         '<tbody>'+
             "<tr>" +
                 "<td class='resul'>" + matesElec[ele].identificador + "</td>" +
@@ -251,6 +289,33 @@ function mostrarMaterialElec(){
             "</tr>"+
         "</tbody>";    
     }
+$(document).ready(function() {
+    $('table').DataTable( {
+        "language": {
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "info": "Mostrando _PAGE_ de _PAGES_ de _MAX_ registros totales",
+            "search": "Buscar",
+            "lengthMenu": "Mostrar _MENU_ resultados",
+            "emptyTable": "No hay datos en la tabla"
+        },   
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal( {
+                    header: function ( row ) {
+                        var data = row.data();
+                        return 'Detalles del integrante';
+                    }
+                } ),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                    tableClass: 'table'
+                } )
+            }
+        }
+    } );
+} );
 }
 function eliminarMaterialesElec(id){
 
@@ -293,7 +358,7 @@ function guardarMaterialNoElec(){
     objetoNoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoNoElec.materialesnoelectronicos = matesNoElec;
     $.ajax({ 
-            url: 'mongodb://<Andmorales>:<andresmm2410>@ds247619.mlab.com:47619/proyectoexpo/api/annadematerialnoelectronico',
+            url: 'http://localhost:8080/api/annadematerialnoelectronico',
             type: 'POST',
             dataType:'json',
             data: objetoNoElec,
@@ -326,6 +391,13 @@ function mostrarMaterialNoElec(){
             "</tr>"+
         "</tbody>";    
     }
+    $(document).ready(function() {
+    $('table').DataTable( {
+        responsive: true,
+        keys: true
+    } );
+} );
+
 }
 function annadirMaterialesNoElecTabla(nombreproyecto,materiales){
     localStorage.setItem("materialNoElecProyecto",JSON.stringify(materiales));

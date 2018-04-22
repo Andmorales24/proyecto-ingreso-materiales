@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="Js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Js/bootstrap-4.0.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="CSS/form.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
-<body onload="mostrarIntegrantes()">
+<body >
 <div class="container">  
   <div id="contact" >
     <h3>Integrantes</h3>
@@ -30,10 +32,24 @@
       </fieldset>
       <button name="submit"  id="botonAnadir" onclick="annadirestudiante()">Añadir</button>
       <button name="submit"  id="botonGuardar" onclick="guardarIntegrantes()" >Guardar</button>
+      <button name="submit"  id="botonMostrar" onclick="mostrarIntegrantes()" >Mostrar Guardados</button>
 </div>
-    <table id="tabla">
+
+</div>
+<div id="contenedorTabla">  
+    <table id="customers" "table table-striped table-bordered dt-responsive nowrap" >
+        <thead id="headerTabla">
+        </thead>
+        <tbody id="bodyTabla">
+        </tbody>
     </table>
 </div>
-       <script type="text/javascript" src="Js/Formulario.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="Js/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="DataTables/Responsive-2.2.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="DataTables/Responsive-2.2.1/js/responsive.bootstrap4.js"></script>
+<script type="text/javascript" src="Js/Formulario.js"></script>
 </body>
 </html>

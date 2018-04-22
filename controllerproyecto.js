@@ -1,6 +1,7 @@
 var Proyectoexpo = require('./proyectoexpo');
 
 //Obtiene todos los objetos Persona de la base de datos
+
 exports.getProyectosExpo = function(req,res){
     Proyectoexpo.find(
         function(err,proyectoexpo) {

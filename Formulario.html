@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
-<header>
+<head>
 <title>Formulario </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="Js/jquery-3.2.1.min.js"></script>
-
-
-
-
+<link rel="stylesheet" type="text/css" href="Js/bootstrap-4.0.0-dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="DataTables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="CSS/form.css">
-
-
-</header>
+</head>
 <body>
 <div class="container">  
   <div id="contact" >
@@ -30,8 +26,19 @@
     <fieldset>
       <input id="seccion" placeholder="Seccion" type="text" tabindex="2" required>
     </fieldset>
+      
     <fieldset>
-      <input id="especialidad" placeholder="Especialidad" type="text" tabindex="2" required>
+     <select id="especialidad" tabindex="3" name="carlist">
+        <option selected disabled>Especialidad / Académica</option>
+        <option>EMA</option>
+        <option>ECA</option>
+        <option>Dibujo Arquitectonico</option>
+        <option>Info Redes</option>
+        <option>Info Desarrollo</option>
+        <option>Diseño</option>
+        <option>Meca</option>
+        <option>Académicas</option>
+    </select>
     </fieldset>
     <fieldset>
       <input id="logo" placeholder="Logo"  type="file" tabindex="2">
@@ -44,10 +51,35 @@
 
 </div>
 
-    <table id="tabla">
-    </table>
-</div>
-<script type="text/javascript" src="Js/Formulario.js"></script>
 
+</div>
+<div id="contenedorTabla">  
+    <table id="customers" "table table-striped table-bordered dt-responsive nowrap" >
+        <thead>
+            <tr>
+                <th  class='titulos'>Codigo</th>
+                <th  class='titulos'>Nombre</th>
+                <th  class='titulos'>Seccion</th>
+                <th  class='titulos'>Nivel</th>
+                <th  class='titulos'>Especialidad</th>
+                <th  class='titulos'>Logo</th>
+                <th  class='titulos'>Aula</th>
+                <th  class='titulos'>Eliminar</th>
+                <th  class='titulos'>Integrantes</th>
+                <th class='titulos'>MaterialesElec</th>
+                <th  class='titulos'>MaterialesNoElec</th>
+            </tr>
+        </thead>
+        <tbody id="bodyTabla">
+        </tbody>
+    </table>
+</div>  
 </body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="Js/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="DataTables/Responsive-2.2.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="DataTables/Responsive-2.2.1/js/responsive.bootstrap4.js"></script>
+<script type="text/javascript" src="Js/Formulario.js"></script>
 </html>

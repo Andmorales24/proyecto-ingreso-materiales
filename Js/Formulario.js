@@ -363,7 +363,7 @@ function guardarMaterialNoElec(){
     objetoNoElec.materialesnoelectronicos = matesNoElec;
     $.ajax({ 
             //url: 'http://localhost:8080/api/annadematerialnoelectronico',
-            url: 'api/annadematerialnoelectronico'
+            url: 'api/annadematerialnoelectronico',
             type: 'POST',
             dataType:'json',
             data: objetoNoElec,

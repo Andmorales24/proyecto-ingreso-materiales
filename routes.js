@@ -2,19 +2,7 @@ var Controller = require('./controllerproyecto');
 var cors = require('cors');
 
 module.exports = function(app){
-   router.delete('api/proyectopornombre' function(req, res) {
 
-    var db = req.db;
-
-    var studentToDelete = req.params.id;
-
-    db.collection('studentcollection').removeById(studentToDelete, function(err, result) {
-
-        res.send((result === 1) ? { msg: '' } : { msg:'error: ' + err });
-
-    });
-
-});
     app.use(cors());
     //Devolver todas los personas
     app.post('/api/insertarproyecto', Controller.setProyectoexpo);

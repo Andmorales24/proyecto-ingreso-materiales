@@ -35,7 +35,8 @@ function guardarProyecto(){
         }
     $('input[type="text"],input[type="date"]').val('');
         $.ajax({ 
-            url: 'http://localhost:8080/api/insertarproyecto',
+            //url: 'http://localhost:8080/api/insertarproyecto',
+            url: '/api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,
@@ -52,7 +53,8 @@ function guardarProyecto(){
 function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
-        url: 'http://localhost:8080/api/todosProyectosexpo',
+        //url: 'http://localhost:8080/api/todosProyectosexpo',
+        url: '/api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,
@@ -119,7 +121,8 @@ if (files.length > 0){
     }
     $.ajax({
         type: "POST",
-        url:"http://localhost:8080/log",
+        //url:"http://localhost:8080/log",
+        url:"/log",
         contentType: false,
         processData: false,
         enctype: "multipart/form-data",

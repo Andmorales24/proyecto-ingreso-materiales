@@ -24,8 +24,8 @@ app.use(multer({ dest: './Js/logos/',
                     done=true;
                 }            
 }));
-mongoose.connect('mongodb://localhost:27017/proyectosexpo');          //local      //hacemos la conexiòn a
-// mongoose.connect('mongodb://<andmorales>:<andresmm2410>@ds153869.mlab.com:53869/proyecto-ingreso-materiales');
+//mongoose.connect('mongodb://localhost:27017/proyectosexpo');          //local      //hacemos la conexiòn a
+mongoose.connect('mongodb://<andmorales>:<andresmm2410>@ds153869.mlab.com:53869/proyecto-ingreso-materiales');
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'MongoDB error de conexiòn: '));
 app.configure(function(){

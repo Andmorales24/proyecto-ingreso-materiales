@@ -36,7 +36,7 @@ function guardarProyecto(){
     $('input[type="text"],input[type="date"]').val('');
         $.ajax({ 
             //url: 'http://localhost:8080/api/insertarproyecto',
-            url: '/api/insertarproyecto',
+            url: 'api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,
@@ -54,7 +54,7 @@ function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
         //url: 'http://localhost:8080/api/todosProyectosexpo',
-        url: '/api/todosProyectosexpo',
+        url: 'api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,
@@ -157,7 +157,8 @@ function guardarIntegrantes(){
     objeto.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objeto.integrantes = inte;
     $.ajax({ 
-            url: 'http://localhost:8080/api/annadeestudiantes',
+            // url: 'http://localhost:8080/api/annadeestudiantes',
+            url: '/api/annadeestudiantes',
             type: 'POST',
             dataType:'json',
             data: objeto,
@@ -361,7 +362,8 @@ function guardarMaterialNoElec(){
     objetoNoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoNoElec.materialesnoelectronicos = matesNoElec;
     $.ajax({ 
-            url: 'http://localhost:8080/api/annadematerialnoelectronico',
+            //url: 'http://localhost:8080/api/annadematerialnoelectronico',
+            url: 'api/annadematerialnoelectronico'
             type: 'POST',
             dataType:'json',
             data: objetoNoElec,

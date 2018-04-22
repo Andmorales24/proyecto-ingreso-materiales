@@ -1,3 +1,0 @@
-e:
-cd E:\Undecimo\Desarrollo\Proyecto Expo\Json
-node server.js

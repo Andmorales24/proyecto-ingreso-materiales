@@ -143,8 +143,8 @@ var files = $("#logo").get(0).files;
             
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/log",
-                //url: "/log",
+                //url: "http://localhost:8080/log",
+                url: "https://proyecto-ingreso-materiales.herokuapp.com//log",
                 contentType:false,
                 processData: false,
                 enctype:"multipart/form-data",

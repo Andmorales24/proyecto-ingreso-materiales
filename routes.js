@@ -22,7 +22,7 @@ module.exports = function(app){
     
     app.post('/api/eliminarproyecto', Controller.removeProyectoexpo);
     
-    app.post('/log',function(req,res){
+    app.post('/api/log',function(req,res){
         
     });
 

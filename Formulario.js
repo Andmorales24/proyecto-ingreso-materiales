@@ -28,33 +28,35 @@ function guardarProyecto(){
         if (files.length > 0){
             var sFilename =files[0].name;
             var sFileExtension = sFilename.split('.')[sFilename.split('.').length - 1].toLowerCase();
-            campos.urllogo= 'logos/'+ document.getElementById("nombre").value + "." + sFileExtension;
+            campos.urllogo= 'Js/logos/'+ document.getElementById("nombre").value + "." + sFileExtension;
         }
         else{
-            campos.urllogo= 'logos/' + document.getElementById('nombre').value;
+            campos.urllogo= 'Js/logos/' + document.getElementById('nombre').value;
         }
-    $('input[type="text"],input[type="date"]').val('');
+     subeImagen(document.getElementById('nombre').value);
+
         $.ajax({ 
-            //url: 'http://localhost:8080/api/insertarproyecto',
-            url: '/api/insertarproyecto',
+            url: 'http://localhost:8080/api/insertarproyecto',
+            //url: '/api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,
             success: function(datad, textStatus, xhr){
-            subeImagen();
+           
             alert("Se guardo el proyecto");
         },
         error: function(xhr, textStaus, errorThrown){
             alert (xhr);
         }
         });
+        $('input[type="text"],input[type="date"]').val('');
 }
 //Mostrar proyectos guardados
 function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
-        //url: 'http://localhost:8080/api/todosProyectosexpo',
-        url: '/api/todosProyectosexpo',
+        url: 'http://localhost:8080/api/todosProyectosexpo',
+        //url: '/api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,
@@ -67,9 +69,9 @@ function mostrarProyectos(){
                     "<td class='resul'>"+datad[ele].seccion+"</td> "+
                     "<td class='resul'>"+datad[ele].nivel+"</td> "+
                     "<td class='resul'>"+datad[ele].especialidad+"</td> "+
-                    "<td class='resul'>" +datad[ele].urllogo+"</td> "+
+                    "<td class='resul'>"+"<img src ='"+datad[ele].urllogo+"'/></td> "+
                     "<td class='resul'>"+datad[ele].aula+"</td>" + 
-                    "<td class='resul'>"+"<button type='submit' class='botonTabla' onclick='eliminarProyecto(\""+datad[ele].nombre +")'>Eliminar</button>"+"</td>" + 
+                    "<td class='resul'>"+"<button type='submit' class='botonTabla' onclick='eliminarProyecto(\""+datad[ele].nombre +"\")'>Eliminar</button>"+"</td>" + 
                     "<td class='resul'>"+"<button type='submit' class='botonTabla' onclick='annadirIntegranteTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].integrantes)+")'>Añadir</button>"+"</td>" + 
                     "<td class='resul'>"+"<button type='submit'  class='botonTabla' onclick='annadirMaterialesElecTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].materialeselectronicos)+")'>Añadir</button>"+"</td>" +
                     "<td class='resul'>"+"<button type='submit'  class='botonTabla' onclick='annadirMaterialesNoElecTabla(\""+datad[ele].nombre +"\","+JSON.stringify(datad[ele].materialesnoelectronicos)+")'>Añadir</button>"+"</td>" +
@@ -108,36 +110,58 @@ $(document).ready(function() {
         },
     });
 }
-
+function eliminarProyecto(nombreproyecto){
+    var persona = new Object();
+    persona.nombre = nombreproyecto;
+    
+    $.ajax({
+    //url:'http://localhost:8080/api/borrarproyecto',
+    url:'http://localhost:8080/api/eliminarproyecto',
+    type:'POST',
+    datatype: 'json',
+    data:persona,
+    success: function(datad, textStatus, xhr) {
+        alert("Se borro el proyecto")
+    },
+    error : function(xhr, textStatus, errorThrown){
+        alert(xhr);
+    }});
+    
+}
     
 //Fin para proyectos
 //Para imagen
-function subeImagen(){
+function subeImagen(nom){
 var files = $("#logo").get(0).files;
-if (files.length > 0){
-    var data = new FormData();
-    for (i = 0; i < files.length; i++){
-        data.append(document.getElementById('nombre').value, files[i]);
-    }
-    $.ajax({
-        type: "POST",
-        //url:"http://localhost:8080/log",
-        url:"/log",
-        contentType: false,
-        processData: false,
-        enctype: "multipart/form-data",
-        data: data,
-        success: function (result){
-            alert ("Imagenes guardadas");
-            location.href='Formulario.html'
+        if (files.length>0){
+              
+            var data = new FormData();
+            files[0].name = 'plantilla';
+
+            for(i=0;i<files.length;i++){
+                data.append(nom, files[i]);
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/log",
+                //url: "/log",
+                contentType:false,
+                processData: false,
+                enctype:"multipart/form-data",
+                data:data,
+                success: function(result){
+                    alert("Datos guardados correctamente");
+                    location.href="Formulario.html";
+                }
+                
+            });
         }
-        
-    });
-}
-else{
-    alert ("Por favor seleccione una imagen");
+    else{
+        alert("Debe de seleccionar el archivo");
 }
 }
+
 //Fin imagen
 //Empieza el añadido de estudiantes
 function annadirestudiante(){  
@@ -157,8 +181,8 @@ function guardarIntegrantes(){
     objeto.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objeto.integrantes = inte;
     $.ajax({ 
-            //url: 'http://localhost:8080/api/annadeestudiantes',
-            url: '/api/annadeestudiantes',
+            url: 'http://localhost:8080/api/annadeestudiantes',
+            //url: '/api/annadeestudiantes',
             type: 'POST',
             dataType:'json',
             data: objeto,
@@ -260,8 +284,8 @@ function guardarMaterialElec(){
     objetoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoElec.materialeselectronicos = matesElec;
     $.ajax({ 
-            //url: 'http://localhost:8080/api/materialeslectronicos',
-            url: '/api/materialeslectronicos',
+            url: 'http://localhost:8080/api/materialeslectronicos',
+            //url: '/api/materialeslectronicos',
             type: 'POST',
             dataType:'json',
             data: objetoElec,
@@ -363,8 +387,8 @@ function guardarMaterialNoElec(){
     objetoNoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoNoElec.materialesnoelectronicos = matesNoElec;
     $.ajax({ 
-            //url: 'http://localhost:8080/api/annadematerialnoelectronico',
-            url: '/api/annadematerialnoelectronico',
+            url: 'http://localhost:8080/api/annadematerialnoelectronico',
+            //url: '/api/annadematerialnoelectronico',
             type: 'POST',
             dataType:'json',
             data: objetoNoElec,

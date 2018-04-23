@@ -20,6 +20,8 @@ module.exports = function(app){
     
     app.post('/api/proyecyoporid', Controller.getproyectobyid);
     
+    app.post('/api/eliminarproyecto', Controller.removeProyectoexpo);
+    
     app.post('/log',function(req,res){
         
     });

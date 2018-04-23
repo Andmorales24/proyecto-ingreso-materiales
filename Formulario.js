@@ -36,8 +36,8 @@ function guardarProyecto(){
      subeImagen(document.getElementById('nombre').value);
 
         $.ajax({ 
-            url: 'http://localhost:8080/api/insertarproyecto',
-            //url: '/api/insertarproyecto',
+            //url: 'http://localhost:8080/api/insertarproyecto',
+            url: 'https://proyecto-ingreso-materiales.herokuapp.com//api/insertarproyecto',
             type: 'POST',
             dataType:'json',
             data: campos,
@@ -55,8 +55,8 @@ function guardarProyecto(){
 function mostrarProyectos(){
     var campos = new Object();
     $.ajax({
-        url: 'http://localhost:8080/api/todosProyectosexpo',
-        //url: '/api/todosProyectosexpo',
+        //url: 'http://localhost:8080/api/todosProyectosexpo',
+        url: 'https://proyecto-ingreso-materiales.herokuapp.com//api/todosProyectosexpo',
         type: 'POST',
         dataType:'json',
         data: campos,
@@ -115,8 +115,7 @@ function eliminarProyecto(nombreproyecto){
     persona.nombre = nombreproyecto;
     
     $.ajax({
-    //url:'http://localhost:8080/api/borrarproyecto',
-    url:'http://localhost:8080/api/eliminarproyecto',
+    url:'https://proyecto-ingreso-materiales.herokuapp.com/api/eliminarproyecto',
     type:'POST',
     datatype: 'json',
     data:persona,
@@ -181,8 +180,8 @@ function guardarIntegrantes(){
     objeto.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objeto.integrantes = inte;
     $.ajax({ 
-            url: 'http://localhost:8080/api/annadeestudiantes',
-            //url: '/api/annadeestudiantes',
+            //url: 'http://localhost:8080/api/annadeestudiantes',
+            url: 'https://proyecto-ingreso-materiales.herokuapp.com//api/annadeestudiantes',
             type: 'POST',
             dataType:'json',
             data: objeto,
@@ -284,8 +283,8 @@ function guardarMaterialElec(){
     objetoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoElec.materialeselectronicos = matesElec;
     $.ajax({ 
-            url: 'http://localhost:8080/api/materialeslectronicos',
-            //url: '/api/materialeslectronicos',
+            //url: 'http://localhost:8080/api/materialeslectronicos',
+            url: 'https://proyecto-ingreso-materiales.herokuapp.com//api/materialeslectronicos',
             type: 'POST',
             dataType:'json',
             data: objetoElec,
@@ -387,8 +386,8 @@ function guardarMaterialNoElec(){
     objetoNoElec.nombre = localStorage.getItem("nombreproyectoseleccionado");
     objetoNoElec.materialesnoelectronicos = matesNoElec;
     $.ajax({ 
-            url: 'http://localhost:8080/api/annadematerialnoelectronico',
-            //url: '/api/annadematerialnoelectronico',
+            //url: 'http://localhost:8080/api/annadematerialnoelectronico',
+            url: 'https://proyecto-ingreso-materiales.herokuapp.com//api/annadematerialnoelectronico',
             type: 'POST',
             dataType:'json',
             data: objetoNoElec,

@@ -143,8 +143,8 @@ var files = $("#logo").get(0).files;
             
             $.ajax({
                 type: "POST",
-                //url: "http://localhost:8080/log",
-                url: "https://proyecto-ingreso-materiales.herokuapp.com/log",
+                url: "https://proyecto-ingreso-materiales.herokuapp.com/api/log",
+                //url: "/log",
                 contentType:false,
                 processData: false,
                 enctype:"multipart/form-data",
@@ -160,6 +160,7 @@ var files = $("#logo").get(0).files;
         alert("Debe de seleccionar el archivo");
 }
 }
+
 
 //Fin imagen
 //Empieza el añadido de estudiantes

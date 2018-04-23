@@ -113,10 +113,9 @@ exports.materialeselectronicos = function(req, res){
                                 });
                             });
                     }
-
 //Elimino un objeto Persona de la base de datos
 exports.removeProyectoexpo = function(req,res){
-    Proyectoexpo.remove({nombre : req.body.nombre}, function(req,res){
+    Proyectoexpo.remove({nombre : req.body.nombre}, function(err,proyectoexpo){
         if(err)
             res.send(err);
         //Obntiene y devuelve todas las personas tras crear una de ellas
